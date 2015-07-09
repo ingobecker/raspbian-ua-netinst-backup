@@ -14,6 +14,11 @@ for service in $stop_services; do
   service $service stop
 done
 
+if ! ( [ -d $backup_path/tmp ] || mkdir  $backup_path/tmp > /dev/null )
+then
+  echo "Unable to create tmp directory '${backup_path}/tmp'"
+fi
+
 backup_dirs="bin etc home initrd.img lib opt root sbin srv usr var vmlinuz"
 duplicity_includes=""
 
